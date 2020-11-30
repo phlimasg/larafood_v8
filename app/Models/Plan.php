@@ -18,6 +18,11 @@ class Plan extends Model
         'description'
     ];
 
+    public function details()
+    {
+        return $this->hasMany(DetailPlan::class);
+    }
+
     public function search($search = null)
     {
         return $this->where('name','like',"%{$search}%")

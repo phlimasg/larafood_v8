@@ -240,6 +240,7 @@ return [
             'text' => 'Planos',
             'url'  => 'admin/plans',
             //'can'  => 'manage-blog',
+            'icon' => 'fa fa-credit-card'
         ],
         [
             'text'        => 'pages',
