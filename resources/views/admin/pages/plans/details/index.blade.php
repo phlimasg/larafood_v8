@@ -23,23 +23,21 @@
     <div>
         <div class="card" >
             <div class="card-header">
-               
+               Detalhes
             </div>
             <div class="card-body" wire:poll.2s>
                 <table class="table table-condensed">
                     <thead>
                         <tr>                        
-                            <th>Nome</th>
-                            <th>Preço</th>
+                            <th>Nome</th>                            
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($details as $detail)
                             <tr>
-                                <td>{{$detail->name}}</td>
-                                <td>{{$detail->price}}</td>
-                                <td><a href="{{ route('plans.show', ['plan'=>$detail->url]) }}" class="btn btn-warning">Ver</a></td>
+                                <td>{{$detail->name}}</td>                                
+                                <td><a href="{{ route('details.show', ['url'=>$plan->url, 'detail' => $detail->id]) }}" class="btn btn-warning">Ver</a></td>
                             </tr>
                         @endforeach
     
