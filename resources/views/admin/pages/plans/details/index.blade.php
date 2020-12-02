@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Detalhes')
 
 
 @section('content_header')
@@ -23,7 +23,7 @@
     <div>
         <div class="card" >
             <div class="card-header">
-               Detalhes
+               Detalhes 
             </div>
             <div class="card-body" wire:poll.2s>
                 <table class="table table-condensed">
@@ -31,13 +31,25 @@
                         <tr>                        
                             <th>Nome</th>                            
                             <th>Ações</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($details as $detail)
                             <tr>
                                 <td>{{$detail->name}}</td>                                
-                                <td><a href="{{ route('details.show', ['url'=>$plan->url, 'detail' => $detail->id]) }}" class="btn btn-warning">Ver</a></td>
+                                <td>                                    
+                                    <a href="{{ route('details.edit', ['url'=>$plan->url, 'detail' => $detail->id]) }}" class="btn btn-warning"><i class="fa fa-pen"></i> Editar</a>                                
+                                </td>
+                                <td>
+                                    <form action="{{route('details.destroy', ['url'=>$plan->url, 'detail' => $detail->id])}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i> Remover
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
     

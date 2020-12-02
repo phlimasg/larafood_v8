@@ -18,11 +18,16 @@ class DetailPlanController extends Controller
     
     public function index($url)
     {
-        
-        return view('admin.pages.plans.details.index',[
-            'details' => Plan::where('url',$url)->firstOrFail()->details()->paginate(5),
-            'plan' => Plan::where('url',$url)->firstOrFail()
-        ]);
+        try {
+            $plan = Plan::where('url',$url)->firstOrFail();
+            $details = $plan->details()->paginate(5);
+            return view('admin.pages.plans.details.index',[
+                'details' => $details,
+                'plan' => $plan
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -32,8 +37,9 @@ class DetailPlanController extends Controller
      */
     public function create($url)
     {
+        $plan = Plan::where('url',$url)->firstOrFail();
         return view('admin.pages.plans.details.create',[            
-            'plan' => Plan::where('url',$url)->firstOrFail()
+            'plan' => $plan
         ]);
     }
 
@@ -56,9 +62,12 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($url, $id)
     {
-        //
+       return redirect()->route('details.edit',[
+           'url'=>$url,
+           'detail'=>$id,
+       ]);
     }
 
     /**
@@ -67,9 +76,14 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($url, $id)
+    {       
+        $plan = Plan::where('url',$url)->firstOrFail();
+        $detail = $plan->details()->where('id',$id)->firstOrFail();
+        return view('admin.pages.plans.details.edit',[
+            'plan' => $plan,
+            'detail' => $detail,
+        ]);
     }
 
     /**
@@ -79,9 +93,11 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(DetailPlanRequest $request,$url, $id)
+    {        
+        $plan = Plan::where('url',$url)->firstOrFail();
+        $plan->details()->where('id',$id)->update($request->except('_token','_method'));
+        return redirect()->back();
     }
 
     /**
@@ -90,8 +106,10 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($url, $id)
     {
-        //
+        //dd($url, $id);
+        Plan::where('url',$url)->firstOrFail()->details()->where('id',$id)->delete();
+        return redirect()->back();
     }
 }
