@@ -19,6 +19,10 @@ Route::get('/', function () {
 });
 
 Route::namespace('Admin')->prefix('admin')->group(function(){
+    /**Rotas de perfil */
+    Route::resource('profiles', ProfilePlanController::class);
+    
+    /*Rotas de planos e detalhes */
     Route::prefix('plans/{url}')->group(function(){
         Route::resource('details', DetailPlanController::class);        
     });
