@@ -243,11 +243,11 @@ return [
             'icon' => 'fa fa-credit-card'
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Perfis',
+            'url'         => 'admin/profiles',
+            'icon'        => 'fa fa-user',
+            //'label'       => 4,
+            //'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
