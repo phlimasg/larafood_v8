@@ -34,7 +34,12 @@
                     <li>
                         <b>Descrição: </b>{{$plan->description}}
                     </li>
-                </ul>
+                </ul>                
+                @if (!empty(Session::get('message')))
+                    <div class="alert alert-danger">
+                        {{Session::get('message')}}
+                    </div>
+                @endif
     
             </div>
             <div class="card-footer">

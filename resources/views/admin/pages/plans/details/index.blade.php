@@ -30,14 +30,24 @@
                     <thead>
                         <tr>                        
                             <th>Nome</th>                            
-                            <th>Ações</th>
+                            <th>Ações</th>                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($details as $detail)
                             <tr>
                                 <td>{{$detail->name}}</td>                                
-                                <td><a href="{{ route('details.show', ['url'=>$plan->url, 'detail' => $detail->id]) }}" class="btn btn-warning">Ver</a></td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ route('details.show', ['url'=>$plan->url, 'detail' => $detail->id]) }}" class="btn btn-warning">Ver</a>
+                                    <form action="{{ route('details.destroy', ['url'=>$plan->url, 'detail' => $detail->id]) }}" method="post">  
+                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                        @method('delete')
+                                        @csrf
+                                    </form>
+                                    </div>
+                                </td>
+                                
                             </tr>
                         @endforeach
     

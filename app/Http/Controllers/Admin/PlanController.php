@@ -103,8 +103,16 @@ class PlanController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Plan::where('url',$id)->delete();
+        try {            
+            $plan = Plan::where('url',$id)
+            ->with('details')
+            ->first();
+            
+            if(!$plan || $plan->details->count() > 0)
+                return redirect()->back()->with('message','Plano não pode ser excluido, verifique se o plano possui detalhes!');  
+            
+
+            $plan->delete();
             return redirect()->route('plans.index');
         } catch (\Exception $e) {
             return $e->getMessage();

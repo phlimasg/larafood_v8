@@ -47,7 +47,7 @@ class DetailPlanController extends Controller
     {        
         $plan = Plan::where('url',$url)->firstOrFail();
         $plan->details()->create($request->all());
-        return redirect()->back();
+        return redirect()->route('details.index',['url' => $url]);
     }
 
     /**
@@ -90,8 +90,9 @@ class DetailPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($url, $id)
+    {        
+        DetailPlan::destroy($id);
+        return redirect()->back();
     }
 }
