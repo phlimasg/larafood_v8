@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Profile extends Model
+class Permission extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -23,8 +22,8 @@ class Profile extends Model
                     ->paginate(5);
     }
 
-    public function permissions()
+    public function profiles()
     {
-        return $this->BelongsToMany(Permission::class);
+        return $this->BelongsToMany(Profile::class);
     }
 }

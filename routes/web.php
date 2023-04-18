@@ -20,7 +20,16 @@ Route::get('/', function () {
 
 Route::namespace('Admin')->prefix('admin')->group(function(){
     /**Rotas de perfil */
-    Route::resource('profiles', ProfilePlanController::class);
+    Route::namespace('ACL')->group(function(){
+
+        Route::get('profiles/{profile}/permissions', 'PermissionProfileController@permissions')->name('profile.permissions');
+        Route::any('profiles/search','ProfileController@search')->name('profiles.search');
+        Route::resource('profiles', ProfileController::class);
+
+        Route::any('permissions/search','PermissionController@search')->name('permissions.search');
+        Route::resource('permissions', PermissionController::class);
+    });
+
     
     /*Rotas de planos e detalhes */
     Route::prefix('plans/{url}')->group(function(){

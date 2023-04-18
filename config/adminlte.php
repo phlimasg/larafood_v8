@@ -249,6 +249,13 @@ return [
             //'label'       => 4,
             //'label_color' => 'success',
         ],
+        [
+            'text'        => 'Permissões',
+            'url'         => 'admin/permissions',
+            'icon'        => 'fa fa-user',
+            //'label'       => 4,
+            //'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', $profile->nome)
+@section('title', $permission->nome)
 
 
 @section('content_header')
@@ -9,7 +9,7 @@
       <h1>Perfis</h1>
     </div>
     <div class="col-sm-6">
-        @include('admin.pages.profiles.partials.breadcrumb')
+        @include('admin.pages.permissions.partials.breadcrumb')
     </div>    
 </div>
 @stop
@@ -18,15 +18,15 @@
     <div>
         <div class="card" >
             <div class="card-header">
-                {{$profile->name}}
+                {{$permission->name}}
             </div>
             <div class="card-body" >
                 <ul>
                     <li>
-                        <b>Nome: </b>{{$profile->name}}
+                        <b>Nome: </b>{{$permission->name}}
                     </li>                    
                     <li>
-                        <b>Descrição: </b>{{$profile->description}}
+                        <b>Descrição: </b>{{$permission->description}}
                     </li>
                 </ul>
     
@@ -34,10 +34,10 @@
             <div class="card-footer">
                 <div class="row">                    
                     <div class="col-sm-2 ">
-                        <a href="{{ route('profiles.edit', ['profile'=> $profile->id]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a>
+                        <a href="{{ route('permissions.edit', ['permission'=> $permission->id]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a>
                     </div>
                     <div class="col-sm-2 ">
-                        <form action="{{ route('profiles.destroy', ['profile'=> $profile->id]) }}" method="post">
+                        <form action="{{ route('permissions.destroy', ['permission'=> $permission->id]) }}" method="post">
                             @csrf
                             @method('delete')
                             <button  class="btn btn-danger "><i class="fa fa-trash"></i> Excluir</button>

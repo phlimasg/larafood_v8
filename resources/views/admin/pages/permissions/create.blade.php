@@ -9,24 +9,24 @@
       <h1>Perfis</h1>
     </div>
     <div class="col-sm-6 ">              
-        @include('admin.pages.profiles.partials.breadcrumb')
+        @include('admin.pages.permissions.partials.breadcrumb')
     </div>
   </div>
 @stop
 
 @section('content')    
     <div>
-        @if (!empty($profile))
-        <form action="{{ route('profiles.update',['profile'=>$profile->id]) }}" method="POST" class="form">
+        @if (!empty($permission))
+        <form action="{{ route('permissions.update',['permission'=>$permission->id]) }}" method="POST" class="form">
             @method('put')
             <div class="card" >
                 <div class="card-header">
-                    Editar profileo: {{$profile->name}}            
+                    Editar permissiono: {{$permission->name}}            
         @else
-        <form action="{{ route('profiles.store') }}" method="POST" class="form">
+        <form action="{{ route('permissions.store') }}" method="POST" class="form">
             <div class="card" >
                 <div class="card-header">
-                    Adicionar novo profileo
+                    Adicionar novo permissiono
         @endif
             @csrf
            
@@ -35,14 +35,14 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <label for="">Nome:</label>
-                        <input type="text" name="name" id="" class="form-control @error('name') is-invalid @enderror" value="{{old('name')??$profile->name??''}}">
+                        <input type="text" name="name" id="" class="form-control @error('name') is-invalid @enderror" value="{{old('name')??$permission->name??''}}">
                             @error('name')
                                 <span class="text-danger">*{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-sm-7">
                             <label for="">Descrição:</label>
-                            <input type="text" name="description" id="" class="form-control @error('description') is-invalid @enderror" value="{{old('description')??$profile->description??''}}">
+                            <input type="text" name="description" id="" class="form-control @error('description') is-invalid @enderror" value="{{old('description')??$permission->description??''}}">
                             @error('description')
                                 <span class="text-danger">*{{$message}}</span>
                             @enderror
